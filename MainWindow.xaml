@@ -7,6 +7,47 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.8*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Margin="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3" Grid.RowSpan="2">
+            <ListBox x:Name="listBoxItems" ItemsSource="{Binding}" Margin="2" SelectionChanged="listBoxItems_SelectionChanged">
+                <ListBoxItem>
+                    <DataTemplate>
+
+                        <!--название книги, автор, цена-->
+                        <StackPanel>
+                            <TextBlock FontSize="14" Text="{Binding}"/>
+                            <TextBlock FontSize="14" Text="{Binding}"/>
+                            <TextBlock FontSize="14" Text="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBoxItem>
+            </ListBox>
+        </Border>
+
+        <!--вывод выбранной книги для редактирования. можно сделать как в примере с урока TextBlock и TextBox попарно для названия, автора и цены-->
+        <Border Margin="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3" Grid.Row="0" Grid.Column="1">
+            <DataGrid x:Name="dataGridItems" SelectionChanged="dataGridItems_SelectionChanged" Margin="2" AutoGenerateColumns="True"/>
+        </Border>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <Border CornerRadius="2" BorderThickness="1.8" BorderBrush="Black" Width="100" Margin="40,10,10,10">
+                <Button x:Name="addBtn" Content="Добавить" FontSize="14" FontWeight="SemiBold" Click="addBtn_Click"/>
+            </Border>
+            <Border CornerRadius="2" BorderThickness="1.8" BorderBrush="Black" Width="100" Margin="10">
+                <Button x:Name="editBtn" Content="Изменить" FontSize="14" FontWeight="SemiBold" Click="editBtn_Click"/>
+            </Border>
+            <Border CornerRadius="2" BorderThickness="1.8" BorderBrush="Black" Width="100" Margin="10,10,40,10">
+                <Button x:Name="delBtn" Content="Удалить" FontSize="14" FontWeight="SemiBold" Click="delBtn_Click"/>
+            </Border>
+        </StackPanel>
     </Grid>
 </Window>
