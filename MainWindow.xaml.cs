@@ -18,7 +18,7 @@ namespace Team_project
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
     }
 }
