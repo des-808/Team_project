@@ -20,5 +20,30 @@ namespace Team_project
         {
             InitializeComponent();
         }
+
+        private void listBoxItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void dataGridItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void editBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void delBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
