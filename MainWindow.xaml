@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <Border Margin="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3" Grid.RowSpan="2">
-            <ListBox x:Name="listBoxItems" ItemsSource="{Binding}" Margin="2" SelectionChanged="listBoxItems_SelectionChanged">
+            <ListBox x:Name="listBoxItems" ItemsSource="{Binding}" SelectedItem="{Binding SelectedItem}" Margin="2" SelectionChanged="listBoxItems_SelectionChanged">
                 <ListBoxItem>
                     <DataTemplate>
 
@@ -40,13 +40,13 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <Border CornerRadius="2" BorderThickness="1.8" BorderBrush="Black" Width="100" Margin="40,10,10,10">
-                <Button x:Name="addBtn" Content="Добавить" FontSize="14" FontWeight="SemiBold" Click="addBtn_Click"/>
-            </Border>
+                <Button x:Name="addBtn" Content="Добавить" FontSize="14" FontWeight="SemiBold" Command="{Binding Command_AddBtn}"/>
+            </Border> 
             <Border CornerRadius="2" BorderThickness="1.8" BorderBrush="Black" Width="100" Margin="10">
-                <Button x:Name="editBtn" Content="Изменить" FontSize="14" FontWeight="SemiBold" Click="editBtn_Click"/>
+                <Button x:Name="editBtn" Content="Изменить" FontSize="14" FontWeight="SemiBold" Command="{Binding Command_EditBtn}"/>
             </Border>
             <Border CornerRadius="2" BorderThickness="1.8" BorderBrush="Black" Width="100" Margin="10,10,40,10">
-                <Button x:Name="delBtn" Content="Удалить" FontSize="14" FontWeight="SemiBold" Click="delBtn_Click"/>
+                    <Button x:Name="delBtn" Content="Удалить" FontSize="14" FontWeight="SemiBold" Command="{Binding Command_DelBtn}"/>
             </Border>
         </StackPanel>
     </Grid>
