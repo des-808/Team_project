@@ -24,7 +24,7 @@ public partial class DbbooksContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
-        => optionsBuilder.UseSqlServer("Data Source={Environment.MachineName}\\SQLEXPRESS;Initial Catalog=DBBooks;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;");
+        => optionsBuilder.UseSqlServer($"Data Source={Environment.MachineName}\\SQLEXPRESS;Initial Catalog=DBBooks;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
