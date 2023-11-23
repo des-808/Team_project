@@ -27,6 +27,8 @@ namespace Team_project.ViewModel
         public MainWindowViewModel()
         {
             db.Books.Load();
+            db.Authors.Load();
+            db.Categories.Load();
             BooksObserv = db.Books.Local.ToObservableCollection();
         }
 
@@ -46,7 +48,7 @@ namespace Team_project.ViewModel
         }
 
         private RelayCommand addCommand;
-        private RelayCommand AddCommand
+        public RelayCommand AddCommand
         {
             get
             {
@@ -55,7 +57,7 @@ namespace Team_project.ViewModel
         }
 
         private RelayCommand deleteComand;
-        private RelayCommand DeleteCommand
+        public RelayCommand DeleteCommand
         {
             get
             {
@@ -64,7 +66,7 @@ namespace Team_project.ViewModel
         }
 
         private RelayCommand updateComand;
-        private RelayCommand UpdateCommand
+        public RelayCommand UpdateCommand
         {
             get
             {
