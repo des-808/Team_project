@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Team_project.ViewModel;
 
 namespace Team_project
 {
@@ -16,9 +17,13 @@ namespace Team_project
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public static MainWindowViewModel ViewModel { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            ViewModel = new MainWindowViewModel();
+            DataContext = ViewModel;
         }
 
         private void listBoxItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
