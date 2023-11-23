@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Team_project.Model;
 
 namespace Team_project.ViewModel
@@ -12,18 +13,18 @@ namespace Team_project.ViewModel
     public class MainWindowViewModel : Notify
     {
         DbbooksContext db = new DbbooksContext();
-        private Book? selectedBook;
+        private RelayCommand addCommand;
+        private RelayCommand deleteComand;
+        private RelayCommand editComand;
+        Book selectedBook;
         public ObservableCollection<Book> BooksObserv { get; set; }
 
-        public Book SelectedUser
+        public Book SelectedBook
         {
-            get => selectedBook;
-            set
-            {
-                selectedBook = value;
-                OnPropertyChanged("SelectedUser");
-            }
+            get { return selectedBook;}
+            set{ selectedBook = value; OnPropertyChanged("SelectedBook"); }
         }
+        
         public MainWindowViewModel()
         {
             db.Books.Load();
@@ -32,21 +33,29 @@ namespace Team_project.ViewModel
 
         private void AddMethod()
         {
-
+            Book book = new Book();
+            book.Title = "капитанская будка";
+            book.Description = "ХЗ";
+            db.Books.Add(book);
+            db.SaveChanges();
+            //author.FirstName = "Федя"; author.LastName = "Форточкин";
+            //author.Books = BooksObserv;
+            //MessageBox.Show("Добавляем что-то");
         }
 
-        private void DeleteMethod()
+        private void DeleteMethod(Object obj)
         {
 
+            MessageBox.Show("Удаляем что-то");
         }
 
-        private void UpdateMethod() 
-        { 
+        private void EditMethod() 
+        {
+            MessageBox.Show("Обновляем что-то");
+        }
+
         
-        }
-
-        private RelayCommand addCommand;
-        private RelayCommand AddCommand
+        public RelayCommand AddCommand
         {
             get
             {
@@ -54,21 +63,34 @@ namespace Team_project.ViewModel
             }
         }
 
-        private RelayCommand deleteComand;
-        private RelayCommand DeleteCommand
+        
+        public RelayCommand DeleteCommand
         {
+            //get
+            //{
+            //    return deleteComand ?? new RelayCommand(obj => { DeleteMethod(selectedItem); });
+            //}
+
             get
             {
-                return deleteComand ?? new RelayCommand(obj => { DeleteMethod(); });
+                return deleteComand ??
+                  (deleteComand = new RelayCommand((selectedItem) =>
+                  {
+                      // получаем выделенный объект
+                      Book? book = selectedItem as Book;
+                      if (book == null) return;
+                      db.Books.Remove(book);
+                      db.SaveChanges();
+                  }));
             }
         }
 
-        private RelayCommand updateComand;
-        private RelayCommand UpdateCommand
+        
+        public RelayCommand EditCommand
         {
             get
             {
-                return updateComand ?? new RelayCommand(obj => { DeleteMethod(); });
+                return editComand ?? new RelayCommand(obj => { EditMethod(); });
             }
         }
     }

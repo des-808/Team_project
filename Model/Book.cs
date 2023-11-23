@@ -7,8 +7,8 @@ public partial class Book : Notify
 {
     public int BookId { get; set; }
 
-    public string title;
-    public string description;
+    private string? title;
+    private string? description;
     public string Title 
     {
         get {  return title; } 

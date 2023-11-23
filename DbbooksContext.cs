@@ -7,14 +7,9 @@ namespace Team_project;
 
 public partial class DbbooksContext : DbContext
 {
-    public DbbooksContext()
-    {
-    }
+    public DbbooksContext(){}
 
-    public DbbooksContext(DbContextOptions<DbbooksContext> options)
-        : base(options)
-    {
-    }
+    public DbbooksContext(DbContextOptions<DbbooksContext> options): base(options){}
 
     public virtual DbSet<Author> Authors { get; set; }
 
@@ -24,27 +19,21 @@ public partial class DbbooksContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-0BAGMG4\\SQLEXPRESS;Initial Catalog=DBBooks;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;");
+        => optionsBuilder.UseSqlServer($"Data Source={Environment.MachineName};Initial Catalog=DBBooks;Integrated Security=True;Connect Timeout=30;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Author>(entity =>
         {
             entity.HasKey(e => e.AuthorId).HasName("PK__Authors__70DAFC147E5E5105");
-
-            entity.Property(e => e.AuthorId).HasColumnName("AuthorID");
-            entity.Property(e => e.FirstName)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.LastName)
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            entity.Property(e => e.AuthorId ).HasColumnName("AuthorID");
+            entity.Property(e => e.FirstName).HasMaxLength(50).IsUnicode(false);
+            entity.Property(e => e.LastName ).HasMaxLength(50).IsUnicode(false);
         });
 
         modelBuilder.Entity<Book>(entity =>
         {
             entity.HasKey(e => e.BookId).HasName("PK__Books__3DE0C2274DA12BA7");
-
             entity.Property(e => e.BookId).HasColumnName("BookID");
             entity.Property(e => e.AuthorFk).HasColumnName("Author_FK");
             entity.Property(e => e.CategoryFk).HasColumnName("Category_FK");
@@ -64,12 +53,9 @@ public partial class DbbooksContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__19093A2BD6888DBA");
-
+            entity.HasKey  (e => e.CategoryId).HasName("PK__Categori__19093A2BD6888DBA");
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
-            entity.Property(e => e.CategoryName)
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            entity.Property(e => e.CategoryName).HasMaxLength(50).IsUnicode(false);
         });
 
         OnModelCreatingPartial(modelBuilder);
