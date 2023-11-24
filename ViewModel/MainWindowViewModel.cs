@@ -13,9 +13,6 @@ namespace Team_project.ViewModel
     {
         DbbooksContext db = new DbbooksContext();
         private Book? selectedBook;
-        /// <summary>
-        /// Коллекция для сборки данных для работы с ними.
-        /// </summary>
         public ObservableCollection<Book> BooksObserv { get; set; }
 
         public Book SelectedUser
