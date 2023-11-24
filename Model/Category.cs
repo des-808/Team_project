@@ -10,9 +10,9 @@ public partial class Category : Notify
     public string categoryName;
 
 
-    public string CategoryName 
+    public string CategoryName
     {
-        get {  return categoryName; } 
+        get { return categoryName; }
         set { categoryName = value; OnPropertyChanged("CategoryName"); }
     }
 

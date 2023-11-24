@@ -12,21 +12,28 @@ namespace Team_project.ViewModel
     public class MainWindowViewModel : Notify
     {
         DbbooksContext db = new DbbooksContext();
-        private Book? selectedBook;
+        //public string title;
+        //public string description;
+        public string lastName;
+        public string firstName;
+        public string category;
         public ObservableCollection<Book> BooksObserv { get; set; }
 
-        public Book SelectedUser
+        public Book? selectedBook;
+        public Book SelectedBook
         {
             get => selectedBook;
             set
             {
                 selectedBook = value;
-                OnPropertyChanged("SelectedUser");
+                OnPropertyChanged("SelectedBook");
             }
         }
         public MainWindowViewModel()
         {
             db.Books.Load();
+            db.Authors.Load();
+            db.Categories.Load();
             BooksObserv = db.Books.Local.ToObservableCollection();
         }
 
@@ -40,9 +47,9 @@ namespace Team_project.ViewModel
 
         }
 
-        private void UpdateMethod() 
-        { 
-        
+        private void UpdateMethod()
+        {
+
         }
 
         private RelayCommand addCommand;
