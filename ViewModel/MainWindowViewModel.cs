@@ -15,7 +15,7 @@ namespace Team_project.ViewModel
         private Book? selectedBook;
         public ObservableCollection<Book> BooksObserv { get; set; }
 
-        public Book SelectedUser
+        public Book SelectedBook
         {
             get => selectedBook;
             set
