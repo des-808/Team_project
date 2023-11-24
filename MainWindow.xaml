@@ -33,14 +33,18 @@
 
         <!--вывод выбранной книги для редактирования. можно сделать как в примере с урока TextBlock и TextBox попарно для названия, автора и цены-->
         <Border Margin="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3" Grid.Row="0" Grid.Column="1">
-            <!--<DataGrid x:Name="dataGridItems"  Margin="2" AutoGenerateColumns="True"  />-->
-            <DataGrid x:Name="dataGridItems" ItemsSource="{Binding Path = BooksObserv, Mode=TwoWay}" SelectedItem="{Binding SelectedUser}" Margin="2" AutoGenerateColumns="False">
+            <DataGrid x:Name="dataGridItems" ItemsSource="{Binding Path = BooksObserv, Mode=TwoWay}" SelectedItem="{Binding SelectedUser}" Margin="2" AutoGenerateColumns="False" >
+                <DataGrid.Resources>
+                    <Style TargetType="TextBlock" x:Key="WrapText">
+                        <Setter Property="TextWrapping" Value="Wrap"/>
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Title, Mode=TwoWay}"/>
-                    <DataGridTextColumn Header="Описание" Binding="{Binding Path=Description, Mode=TwoWay}"/>
-                    <DataGridTextColumn Header="Фамилия Автора" Binding="{Binding Path=AuthorFkNavigation.FirstName, Mode=TwoWay}"/>
-                    <DataGridTextColumn Header="Имя Автора" Binding="{Binding Path=AuthorFkNavigation.LastName, Mode=TwoWay}"/>
-                    <DataGridTextColumn Header="Категория" Binding="{Binding Path=CategoryFkNavigation.CategoryName, Mode=TwoWay}"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Title, Mode=TwoWay}" Width="*" ElementStyle="{StaticResource WrapText}"/>
+                    <DataGridTextColumn Header="Описание" Binding="{Binding Path=Description, Mode=TwoWay}" Width="*" ElementStyle="{StaticResource WrapText}"/>
+                    <DataGridTextColumn Header="Фамилия Автора" Binding="{Binding Path=AuthorFkNavigation.FirstName, Mode=TwoWay}" Width="*" ElementStyle="{StaticResource WrapText}"/>
+                    <DataGridTextColumn Header="Имя Автора" Binding="{Binding Path=AuthorFkNavigation.LastName, Mode=TwoWay}" Width="*" ElementStyle="{StaticResource WrapText}"/>
+                    <DataGridTextColumn Header="Категория" Binding="{Binding Path=CategoryFkNavigation.CategoryName, Mode=TwoWay}" Width="*" ElementStyle="{StaticResource WrapText}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
