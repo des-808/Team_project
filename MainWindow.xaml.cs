@@ -12,8 +12,6 @@ using Team_project.ViewModel;
 
 namespace Team_project
 {
-@@ -16,9 +17,13 @@ namespace Team_project
-    /// </summary>
     public partial class MainWindow : Window
     {
 
