@@ -28,6 +28,8 @@ namespace Team_project.ViewModel
         public MainWindowViewModel()
         {
             db.Books.Load();
+            db.Authors.Load();
+            db.Categories.Load();
             BooksObserv = db.Books.Local.ToObservableCollection();
         }
 
