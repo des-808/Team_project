@@ -55,7 +55,7 @@
             <Border CornerRadius="2" BorderThickness="1.8" BorderBrush="Black" Width="100" Margin="40,10,10,10">
                 <Button x:Name="addBtn" Content="Добавить" FontSize="14" FontWeight="SemiBold" Command="{Binding AddComand}"/>
             </Border>
-            <Border CornerRadius="2" BorderThickness="1.8" BorderBrush="Black" Width="100" Margin="10">
+            <Border CornerRadius="2" BorderThickness="1.8" BorderBrush="Black" Width="100" Margin="10"> 
                 <Button x:Name="editBtn" Content="Изменить" FontSize="14" FontWeight="SemiBold" Command="{Binding UpdateComand}"/>
             </Border>
             <Border CornerRadius="2" BorderThickness="1.8" BorderBrush="Black" Width="100" Margin="10,10,40,10">
