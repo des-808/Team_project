@@ -36,24 +36,40 @@ namespace Team_project.ViewModel
         private void AddMethod()
         {
             Book book = new Book();
-            book.Title = "капитанская будка";
-            book.Description = "ХЗ";
+            if (book is null) return;
+            if (selectedBook is null)
+                return;
+            book.Title = SelectedBook.Title;
+            book.Description = SelectedBook.Description;
+            book.AuthorFkNavigation.FirstName = SelectedBook.AuthorFkNavigation.FirstName;
+            book.AuthorFkNavigation.LastName = SelectedBook.AuthorFkNavigation.LastName;
+            book.CategoryFkNavigation.CategoryName = SelectedBook.CategoryFkNavigation.CategoryName;
             db.Books.Add(book);
             db.SaveChanges();
-            //author.FirstName = "Федя"; author.LastName = "Форточкин";
-            //author.Books = BooksObserv;
-            //MessageBox.Show("Добавляем что-то");
         }
 
         private void DeleteMethod(Object obj)
         {
-
-            MessageBox.Show("Удаляем что-то");
+            Book? book = obj as Book;
+            if (book == null) return;
+            db.Books.Remove(book);
+            db.SaveChanges();
+            //MessageBox.Show("Удаляем что-то");
         }
 
-        private void EditMethod() 
+        private void EditMethod(Book SelectedBook) 
         {
-            MessageBox.Show("Обновляем что-то");
+            Book? book = SelectedBook;
+            //if (book is null) return;
+            book.Title = SelectedBook.Title;
+            book.Description = SelectedBook.Description;
+            book.AuthorFkNavigation.FirstName = SelectedBook.AuthorFkNavigation.FirstName;
+            book.AuthorFkNavigation.LastName = SelectedBook.AuthorFkNavigation.LastName;
+            book.CategoryFkNavigation.CategoryName = SelectedBook.CategoryFkNavigation.CategoryName;
+            db.Books.UpdateRange(book);
+            db.SaveChanges();
+           // BooksObserv.
+            
         }
 
         
@@ -68,23 +84,23 @@ namespace Team_project.ViewModel
         
         public RelayCommand DeleteCommand
         {
-            //get
-            //{
-            //    return deleteComand ?? new RelayCommand(obj => { DeleteMethod(selectedItem); });
-            //}
-
             get
             {
-                return deleteComand ??
-                  (deleteComand = new RelayCommand((selectedItem) =>
-                  {
-                      // получаем выделенный объект
-                      Book? book = selectedItem as Book;
-                      if (book == null) return;
-                      db.Books.Remove(book);
-                      db.SaveChanges();
-                  }));
+                return deleteComand ?? new RelayCommand(obj => { DeleteMethod(SelectedBook); });
             }
+
+            //get
+            //{
+            //    return deleteComand ??
+            //      (deleteComand = new RelayCommand((SelectedBook) =>
+            //      {
+            //          // получаем выделенный объект
+            //          Book? book = SelectedBook as Book;
+            //          if (book == null) return;
+            //          db.Books.Remove(book);
+            //          db.SaveChanges();
+            //      }));
+            //}
         }
 
         
@@ -92,8 +108,9 @@ namespace Team_project.ViewModel
         {
             get
             {
-                return editComand ?? new RelayCommand(obj => { EditMethod(); });
+                return editComand ?? new RelayCommand(obj => { EditMethod(SelectedBook); });
             }
         }
+
     }
 }

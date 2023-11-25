@@ -12,7 +12,7 @@ namespace Team_project
     public partial class MainWindow : Window
     {
 
-        public static MainWindowViewModel ViewModel { get; set; }
+        public static MainWindowViewModel? ViewModel { get; set; }
         public MainWindow()
         {
             InitializeComponent();
