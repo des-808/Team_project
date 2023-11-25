@@ -59,17 +59,15 @@ namespace Team_project.ViewModel
 
         private void EditMethod(Book SelectedBook) 
         {
+            if (SelectedBook is null) return;
             Book? book = SelectedBook;
-            //if (book is null) return;
             book.Title = SelectedBook.Title;
             book.Description = SelectedBook.Description;
             book.AuthorFkNavigation.FirstName = SelectedBook.AuthorFkNavigation.FirstName;
             book.AuthorFkNavigation.LastName = SelectedBook.AuthorFkNavigation.LastName;
             book.CategoryFkNavigation.CategoryName = SelectedBook.CategoryFkNavigation.CategoryName;
             db.Books.UpdateRange(book);
-            db.SaveChanges();
-           // BooksObserv.
-            
+            db.SaveChanges();    
         }
 
         
@@ -88,19 +86,6 @@ namespace Team_project.ViewModel
             {
                 return deleteComand ?? new RelayCommand(obj => { DeleteMethod(SelectedBook); });
             }
-
-            //get
-            //{
-            //    return deleteComand ??
-            //      (deleteComand = new RelayCommand((SelectedBook) =>
-            //      {
-            //          // получаем выделенный объект
-            //          Book? book = SelectedBook as Book;
-            //          if (book == null) return;
-            //          db.Books.Remove(book);
-            //          db.SaveChanges();
-            //      }));
-            //}
         }
 
         
