@@ -34,17 +34,33 @@ namespace Team_project.ViewModel
 
         private void AddMethod()//в данный момент не рабочий
         {
+            //Book book = new Book();
+            //if (book is null) return;
+            //if (selectedBook is null)
+            //    return;
+            //book.BookId = 0;
+            //book.Title = SelectedBook.Title;
+            //book.Description = SelectedBook.Description;
+            //book.AuthorFkNavigation.LastName = SelectedBook.AuthorFkNavigation.LastName;
+            //book.AuthorFkNavigation.LastName = SelectedBook.AuthorFkNavigation.LastName;
+            //book.CategoryFkNavigation.CategoryName = SelectedBook.CategoryFkNavigation.CategoryName;
+            //db.Books.Add(book);
+            //db.SaveChanges();
             Book book = new Book();
-            if (book is null) return;
-            if (selectedBook is null)
-                return;
-            book.Title = SelectedBook.Title;
-            book.Description = SelectedBook.Description;
-            book.AuthorFkNavigation.FirstName = SelectedBook.AuthorFkNavigation.FirstName;
-            book.AuthorFkNavigation.LastName = SelectedBook.AuthorFkNavigation.LastName;
-            book.CategoryFkNavigation.CategoryName = SelectedBook.CategoryFkNavigation.CategoryName;
-            db.Books.Add(book);
+            if (selectedBook is null) return;
+            book.Title = selectedBook.Title;
+            book.Description = selectedBook.Description;
+            Author author = new Author();
+            author.FirstName = selectedBook.FirstName;
+            author.LastName = selectedBook.AuthorFkNavigation.LastName;
+            Category category = new Category();
+            category.CategoryName = selectedBook.CategoryFkNavigation.CategoryName;
+            db.Add(book);
+            db.Add(author);
+            db.Add(category);
+            //db.Books.Add(book);
             db.SaveChanges();
+
         }
 
         private void DeleteMethod(Book obj)
@@ -63,15 +79,22 @@ namespace Team_project.ViewModel
             book.Description = SelectedBook.Description;
             book.AuthorFkNavigation.FirstName = SelectedBook.AuthorFkNavigation.FirstName;
             book.AuthorFkNavigation.LastName = SelectedBook.AuthorFkNavigation.LastName;
+
             book.CategoryFkNavigation.CategoryName = SelectedBook.CategoryFkNavigation.CategoryName;
             db.Books.UpdateRange(book);
             db.SaveChanges();    
         }
-
         private void CopyMethod(Book obj)
-        {
+        {   
+            if (obj == null) return;
             Book? book = obj as Book;
-            if (book == null) return; 
+
+            Book newBook = new Book();
+            newBook.Title = book.Title;
+            newBook.Description = book.Description;
+            newBook.AuthorFk = book.AuthorFk;
+            newBook.AuthorFk = book.AuthorFk;
+            newBook.CategoryFk = book.CategoryFk;
             db.Books.Add(book);
             db.SaveChanges();
             //MessageBox.Show("Удаляем что-то");
@@ -81,6 +104,7 @@ namespace Team_project.ViewModel
             get
             {
                 return addComand ?? new RelayCommand(obj => { AddMethod(); });
+                //return addComand ?? new RelayCommand(obj => { CopyMethod(SelectedBook); });
             }
         } 
         public RelayCommand DeleteCommand

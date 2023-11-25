@@ -40,15 +40,15 @@
         <Border Margin="2" BorderThickness="2" BorderBrush="Black" CornerRadius="3" Grid.RowSpan="2">
             <StackPanel>
                 <Label Content="Название"/>
-                <TextBox Text="{Binding SelectedBook.Title, Mode=TwoWay}" Name="TitleBox"/>
+                <TextBox Text="{Binding SelectedBook.Title, Mode=TwoWay}"                             />
                 <Label Content="Описание"/>
-                <TextBox Text="{Binding SelectedBook.Description, Mode=TwoWay}" Name="DescriptionBox"/>
+                <TextBox Text="{Binding SelectedBook.Description, Mode=TwoWay}"                       />
                 <Label Content="Фамилия Автора"/>
-                <TextBox Text="{Binding SelectedBook.AuthorFkNavigation.FirstName, Mode=TwoWay}" Name ="FirstNameBox"/>
+                <TextBox Text="{Binding SelectedBook.AuthorFkNavigation.FirstName, Mode=TwoWay}"      />
                 <Label Content="Имя Автора"/>
-                <TextBox Text="{Binding SelectedBook.AuthorFkNavigation.LastName, Mode=TwoWay}" Name="LastNameBox"/>
+                <TextBox Text="{Binding SelectedBook.AuthorFkNavigation.LastName, Mode=TwoWay}"       />
                 <Label Content="Категория"/>
-                <TextBox Text="{Binding SelectedBook.CategoryFkNavigation.CategoryName, Mode=TwoWay}" Name="CategoryNameBox"/>
+                <TextBox Text="{Binding SelectedBook.CategoryFkNavigation.CategoryName, Mode=TwoWay}" />
             </StackPanel>
         </Border>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
