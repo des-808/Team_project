@@ -13,18 +13,17 @@ namespace Team_project.ViewModel
     public class MainWindowViewModel : Notify
     {
         DbbooksContext db = new DbbooksContext();
-        private RelayCommand addCommand;
+        private RelayCommand copyComand;
+        private RelayCommand addComand;
+        private RelayCommand updateComand;
         private RelayCommand deleteComand;
-        private RelayCommand editComand;
         Book selectedBook;
         public ObservableCollection<Book> BooksObserv { get; set; }
-
         public Book SelectedBook
         {
             get { return selectedBook;}
             set{ selectedBook = value; OnPropertyChanged("SelectedBook"); }
         }
-        
         public MainWindowViewModel()
         {
             db.Books.Load();
@@ -56,7 +55,7 @@ namespace Team_project.ViewModel
             db.SaveChanges();
             //MessageBox.Show("Удаляем что-то");
         }
-        private void EditMethod(Book SelectedBook) 
+        private void UpdateMethod(Book SelectedBook) 
         {
             if (SelectedBook is null) return;
             Book? book = SelectedBook;
@@ -67,12 +66,21 @@ namespace Team_project.ViewModel
             book.CategoryFkNavigation.CategoryName = SelectedBook.CategoryFkNavigation.CategoryName;
             db.Books.UpdateRange(book);
             db.SaveChanges();    
-        }   
+        }
+
+        private void CopyMethod(Book obj)
+        {
+            Book? book = obj as Book;
+            if (book == null) return; 
+            db.Books.Add(book);
+            db.SaveChanges();
+            //MessageBox.Show("Удаляем что-то");
+        }
         public RelayCommand AddCommand
         {
             get
             {
-                return addCommand ?? new RelayCommand(obj => { AddMethod(); });
+                return addComand ?? new RelayCommand(obj => { AddMethod(); });
             }
         } 
         public RelayCommand DeleteCommand
@@ -82,11 +90,18 @@ namespace Team_project.ViewModel
                 return deleteComand ?? new RelayCommand(obj => { DeleteMethod(SelectedBook); });
             }
         }
-        public RelayCommand EditCommand
+        public RelayCommand UpdateCommand
         {
             get
             {
-                return editComand ?? new RelayCommand(obj => { EditMethod(SelectedBook); });
+                return updateComand ?? new RelayCommand(obj => { UpdateMethod(SelectedBook); });
+            }
+        }
+        public RelayCommand CopyCommand
+        {
+            get
+            {
+                return copyComand ?? new RelayCommand(obj => { CopyMethod(SelectedBook); });
             }
         }
 
