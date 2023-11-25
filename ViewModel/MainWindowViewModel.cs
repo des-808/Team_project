@@ -33,7 +33,7 @@ namespace Team_project.ViewModel
             BooksObserv = db.Books.Local.ToObservableCollection();
         }
 
-        private void AddMethod()
+        private void AddMethod()//в данный момент не рабочий
         {
             Book book = new Book();
             if (book is null) return;
@@ -48,7 +48,7 @@ namespace Team_project.ViewModel
             db.SaveChanges();
         }
 
-        private void DeleteMethod(Object obj)
+        private void DeleteMethod(Book obj)
         {
             Book? book = obj as Book;
             if (book == null) return;
@@ -56,7 +56,6 @@ namespace Team_project.ViewModel
             db.SaveChanges();
             //MessageBox.Show("Удаляем что-то");
         }
-
         private void EditMethod(Book SelectedBook) 
         {
             if (SelectedBook is null) return;
@@ -68,18 +67,14 @@ namespace Team_project.ViewModel
             book.CategoryFkNavigation.CategoryName = SelectedBook.CategoryFkNavigation.CategoryName;
             db.Books.UpdateRange(book);
             db.SaveChanges();    
-        }
-
-        
+        }   
         public RelayCommand AddCommand
         {
             get
             {
                 return addCommand ?? new RelayCommand(obj => { AddMethod(); });
             }
-        }
-
-        
+        } 
         public RelayCommand DeleteCommand
         {
             get
@@ -87,8 +82,6 @@ namespace Team_project.ViewModel
                 return deleteComand ?? new RelayCommand(obj => { DeleteMethod(SelectedBook); });
             }
         }
-
-        
         public RelayCommand EditCommand
         {
             get
