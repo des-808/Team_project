@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Team_project.Model
 {
-    class BookAllProperty
+    public partial class BookAllProperty
     {
         public int BookAllPropertyId { get;private set; }
         public List<Author>? Authors { get; set; }

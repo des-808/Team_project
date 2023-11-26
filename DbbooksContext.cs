@@ -5,11 +5,11 @@ using Team_project.Model;
 
 namespace Team_project;
 
-public partial class DbbooksContext : DbContext
+public partial class DbBooksContext : DbContext
 {
-    public DbbooksContext(){}
+    public DbBooksContext(){}
 
-    public DbbooksContext(DbContextOptions<DbbooksContext> options): base(options){}
+    public DbBooksContext(DbContextOptions<DbBooksContext> options): base(options){}
 
     public virtual DbSet<Author> Authors { get; set; }
 
@@ -19,7 +19,7 @@ public partial class DbbooksContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
-        => optionsBuilder.UseSqlServer($"Data Source={Environment.MachineName};Initial Catalog=DBBooks;Integrated Security=True;Connect Timeout=30;Trust Server Certificate=True;");
+        => optionsBuilder.UseSqlServer($"Data Source={Environment.MachineName};Initial Catalog=DBBooks;Integrated Security=True;Encrypt=False;Connect Timeout=30;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

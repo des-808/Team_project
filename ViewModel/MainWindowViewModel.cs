@@ -12,11 +12,11 @@ namespace Team_project.ViewModel
 {
     public class MainWindowViewModel : Notify
     {
-        DbbooksContext db = new DbbooksContext();
-        private RelayCommand copyComand;
-        private RelayCommand addComand;
-        private RelayCommand updateComand;
-        private RelayCommand deleteComand;
+        DbBooksContext db = new DbBooksContext();
+        private readonly RelayCommand copyComand;
+        private readonly RelayCommand addComand;
+        private readonly RelayCommand updateComand;
+        private readonly RelayCommand deleteComand;
         Book selectedBook;
         public ObservableCollection<Book> BooksObserv { get; set; }
         public Book SelectedBook
@@ -26,6 +26,7 @@ namespace Team_project.ViewModel
         }
         public MainWindowViewModel()
         {
+            db.Database.EnsureCreated();
             db.Books.Load();
             db.Authors.Load();
             db.Categories.Load();
@@ -46,17 +47,20 @@ namespace Team_project.ViewModel
             //book.CategoryFkNavigation.CategoryName = SelectedBook.CategoryFkNavigation.CategoryName;
             //db.Books.Add(book);
             //db.SaveChanges();
-            Book book = new Book();
-            if (selectedBook is null) return;
-            book.Title = selectedBook.Title;
-            book.Description = selectedBook.Description;
-            Author author = new Author();
-            author.FirstName = selectedBook.FirstName;
-            author.LastName = selectedBook.AuthorFkNavigation.LastName;
+            Book book = selectedBook as Book;
+            if (book == null) return;
+            //book.Title = selectedBook.Title;
+            //book.Description = selectedBook.Description;
+            //book.AuthorFkNavigation.FirstName = selectedBook.AuthorFkNavigation.FirstName;
+            //book.AuthorFkNavigation.LastName = selectedBook.AuthorFkNavigation.LastName;
+            //book.CategoryFkNavigation.CategoryName = selectedBook.CategoryFkNavigation.CategoryName;
+            //Author author = new Author();
+            //author.FirstName = selectedBook.FirstName;
+           // author.LastName = selectedBook.AuthorFkNavigation.LastName;
             Category category = new Category();
             category.CategoryName = selectedBook.CategoryFkNavigation.CategoryName;
             db.Add(book);
-            db.Add(author);
+            //db.Add(author);
             db.Add(category);
             //db.Books.Add(book);
             db.SaveChanges();
